@@ -1,0 +1,25 @@
+.login-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .user-icon {
+    font-size: 1.2rem;
+    color: #fff;
+  }
+
+  .login-links {
+    font-size: 0.9rem;
+
+    a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #f8f9fa;
+        text-decoration: underline;
+      }
+    }
+  }
+}

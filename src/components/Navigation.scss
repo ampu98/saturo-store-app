@@ -1,0 +1,55 @@
+@import "../style/sass/_variables.scss";
+
+.main-nav {
+  background-color: $primary-color;
+  @include box-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+
+  &__container {
+    width: auto;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+
+  &__list {
+    display: flex;
+    justify-content: flex-start;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__item {
+    margin: $nav-item-margin;
+
+    &:hover {
+      background-color: $secondary-color;
+    }
+  }
+
+  &__link {
+    display: block;
+    padding: $nav-padding;
+    color: $text-color;
+    text-decoration: none;
+    font-size: $base-font-size;
+    font-weight: $font-weight-medium;
+    @include transition(color);
+
+    &:hover {
+      color: $hover-color;
+    }
+  }
+}
+
+@include media-mobile {
+  .main-nav {
+    &__list {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &__item {
+      margin: 5px 0;
+    }
+  }
+}

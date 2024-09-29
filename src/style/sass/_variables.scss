@@ -1,0 +1,31 @@
+// Colors
+$primary-color: #f8f9fa;
+$secondary-color: #e9ecef;
+$text-color: #333;
+$hover-color: #007bff;
+
+// Fonts
+$base-font-size: 16px;
+$font-weight-medium: 500;
+
+// Spacing
+$nav-padding: 15px 10px;
+$nav-item-margin: 0 10px;
+
+// Breakpoints
+$mobile-breakpoint: 768px;
+
+// Mixins
+@mixin transition($property: all, $duration: 0.3s, $timing: ease) {
+  transition: $property $duration $timing;
+}
+
+@mixin box-shadow($shadow...) {
+  box-shadow: $shadow;
+}
+
+@mixin media-mobile {
+  @media (max-width: $mobile-breakpoint) {
+    @content;
+  }
+}

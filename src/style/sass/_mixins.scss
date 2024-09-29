@@ -1,0 +1,8 @@
+@mixin navbar-transitions() {
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: lighten($color: #000000, $amount: 30%);
+    transform: translateY(-2px);
+  }
+}
