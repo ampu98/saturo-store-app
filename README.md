@@ -37,4 +37,4 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 ## Contact
 
-Your Name - Sreesabari R | (mailto:sreesabarirajeev98@gmail.com)
+Your Name - Sreesabari R | (sreesabarirajeev98@gmail.com)
