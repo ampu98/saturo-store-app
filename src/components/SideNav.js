@@ -1,10 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./SideNav.scss";
-import accordionSlice from "../store/slices/AccordionSlice";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategories } from "../Redux/Category/actions";
+import { filterProducts } from "../Redux/Products/ProductsSlice";
 
 const SideNav = () => {
-  const accordionList = useSelector(accordionSlice.getInitialState);
+  const accordionList = useSelector(
+    (state) => state.categoryReducer.categories
+  );
+  const fetchProductsData = useSelector((state) => state.pr);
+  const [products, setProducts] = useState();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCategories());
+  }, []);
+
+  useEffect(() => {
+    setProducts(fetchProductsData.products);
+  }, [fetchProductsData.status]);
+
+  const filterData = (data) => {
+    console.log(data);
+    const payload = { data, products };
+    dispatch(filterProducts(payload));
+  };
 
   return (
     <div className="side-nav">
@@ -14,35 +35,51 @@ const SideNav = () => {
 
       <div className="accordion">
         {accordionList &&
-          accordionList.map((item, key) => (
-            <div className="accordion-item individual-category" key={key}>
-              <div className="accordion-header">
-                <button
-                  className="accordion-button"
-                  data-bs-target={"#collapse" + key}
-                  data-bs-toggle="collapse"
+          accordionList.map(
+            (item) =>
+              item.parent_category_id === null && (
+                <div
+                  className="accordion-item individual-category"
+                  key={item.id}
                 >
-                  <div className="category-title">
-                    <a href="#">{item.category}</a>
+                  <div className="accordion-header">
+                    <button
+                      className="accordion-button"
+                      data-bs-target={`#collapse${item.id}`}
+                      data-bs-toggle="collapse"
+                    >
+                      <div className="category-title">
+                        <a href="#">{item.category}</a>
+                      </div>
+                    </button>
                   </div>
-                </button>
-              </div>
-              <div
-                id={"collapse" + key}
-                className="accordion-collapse collapse show"
-              >
-                <div className="accordion-body">
-                  <ul>
-                    {item.items.map((items, key) => (
-                      <li className="sub-items" key={key}>
-                        <a href="#">{items}</a>
-                      </li>
-                    ))}
-                  </ul>
+                  <div
+                    id={`collapse${item.id}`}
+                    className="accordion-collapse collapse show"
+                  >
+                    <div className="accordion-body">
+                      <ul>
+                        {accordionList.map((subCategory) => {
+                          if (item.id === subCategory.parent_category_id) {
+                            return (
+                              <li className="sub-items" key={subCategory.id}>
+                                <a
+                                  href="#"
+                                  onClick={() => filterData(subCategory)}
+                                >
+                                  {subCategory.category}
+                                </a>
+                              </li>
+                            );
+                          }
+                          return null;
+                        })}
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              )
+          )}
       </div>
     </div>
   );

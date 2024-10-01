@@ -1,22 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Navigation.scss";
-import { useSelector } from "react-redux";
-import categorySlice from "../store/slices/CategorySlice";
+import { useDispatch, useSelector } from "react-redux";
+import categorySlice from "../Redux/Category/CategorySlice";
+import { getCategories } from "../Redux/Category/actions";
 
 const Navigation = () => {
-  const categories = useSelector(categorySlice.getInitialState);
+  const categories = useSelector((state) => state.categoryReducer.categories);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCategories());
+  }, []);
 
   return (
     <nav className="main-nav">
       <div className="main-nav__container">
         <ul className="main-nav__list">
-          {categories.map((category) => (
-            <li className="main-nav__item">
-              <a className="main-nav__link" href={`/${category}`}>
-                {category}
-              </a>
-            </li>
-          ))}
+          {categories.map(
+            (category) =>
+              category.parent_category_id === null && (
+                <li className="main-nav__item">
+                  <a className="main-nav__link" href={`/${category}`}>
+                    {category.category}
+                  </a>
+                </li>
+              )
+          )}
         </ul>
       </div>
     </nav>
