@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./SideNav.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../Redux/Category/actions";
-import { filterProducts } from "../Redux/Products/ProductsSlice";
+import { filterByPrice, filterProducts } from "../Redux/Products/ProductsSlice";
 
 const SideNav = () => {
   const accordionList = useSelector(
@@ -10,6 +10,8 @@ const SideNav = () => {
   );
   const fetchProductsData = useSelector((state) => state.pr);
   const [products, setProducts] = useState();
+  const [minPrice, setMinPrice] = useState(10);
+  const [maxPrice, setMaxPrice] = useState(200);
 
   const dispatch = useDispatch();
 
@@ -25,6 +27,11 @@ const SideNav = () => {
     console.log(data);
     const payload = { data, products };
     dispatch(filterProducts(payload));
+  };
+
+  const filterPrice = () => {
+    const payload = { products, minPrice, maxPrice };
+    dispatch(filterByPrice(payload));
   };
 
   return (
@@ -80,6 +87,39 @@ const SideNav = () => {
                 </div>
               )
           )}
+      </div>
+
+      <div className="section-title">
+        <h3>Filter by price</h3>
+      </div>
+      <div className="price-filter">
+        <div className="price-input">
+          <label htmlFor="min-price">Min: ${minPrice}</label>
+          <input
+            type="range"
+            id="min-price"
+            min={10}
+            max={200}
+            step={10}
+            value={minPrice}
+            onChange={(e) => setMinPrice(e.target.value)}
+          />
+        </div>
+        <div className="price-input">
+          <label htmlFor="max-price">Max: ${maxPrice}</label>
+          <input
+            type="range"
+            id="max-price"
+            min={10}
+            max={200}
+            step={10}
+            value={maxPrice}
+            onChange={(e) => setMaxPrice(e.target.value)}
+          />
+        </div>
+        <button className="filter-button" onClick={() => filterPrice()}>
+          Filter
+        </button>
       </div>
     </div>
   );

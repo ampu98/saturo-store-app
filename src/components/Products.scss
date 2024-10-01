@@ -4,6 +4,22 @@
   gap: 20px;
 }
 
+.no-products-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.no-products-found {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 20px;
+}
+
 .product-container {
   display: flex;
   padding: 20px;
@@ -54,6 +70,10 @@
     font-size: 1rem;
     font-weight: bold;
     color: #007bff;
+  }
+
+  .product-rating {
+    color: rgb(247, 218, 57);
   }
 
   .add-to-cart {
