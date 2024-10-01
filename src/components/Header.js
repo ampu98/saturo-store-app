@@ -1,29 +1,31 @@
 import React from "react";
 import "./Header.scss";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function Header() {
   const cartItemCount = useSelector((state) => state.cr.totalItems);
+
   return (
-    <header className="bg-dark text-white py-3">
+    <header className="header bg-dark text-white py-3">
       <div className="container">
-        <div className="d-flex justify-content-between align-items-center">
-          <div>
-            <h1 className="display-4">Saturo World</h1>
-            <p className="lead">
+        <div className="header-content">
+          <div className="brand">
+            <h1 className="brand-name">Satoru World</h1>
+            <p className="brand-tagline">
               Find great deals on all your favorite products!
             </p>
           </div>
-          <div className="d-flex align-items-center">
-            <div className="dropdown me-2">
+          <div className="nav-actions">
+            <div className="dropdown category-dropdown">
               <select className="form-select" aria-label="Category select">
-                <option selected>Select category</option>
+                <option>Category</option>
                 <option value="men">Men</option>
                 <option value="women">Women</option>
                 <option value="unisex">Unisex</option>
               </select>
             </div>
-            <form className="d-flex">
+            <form className="search-form">
               <div className="input-group">
                 <input
                   className="form-control"
@@ -32,7 +34,7 @@ function Header() {
                   aria-label="Search products"
                 />
                 <button
-                  className="btn btn-outline-light"
+                  className="btn btn-search"
                   type="submit"
                   aria-label="Submit search"
                 >
@@ -40,32 +42,34 @@ function Header() {
                 </button>
               </div>
             </form>
-            <div className="d-flex align-items-center">
-              <div className="login-container ms-3">
+            <div className="user-cart">
+              <div className="user-login">
                 <i
                   className="fa fa-user-circle user-icon"
                   aria-hidden="true"
                 ></i>
                 <nav className="login-links" aria-label="User authentication">
-                  <a href="/login" className="me-2">
+                  <Link to="/login" className="login-link">
                     Login
-                  </a>
-                  <a href="/register">Register</a>
+                  </Link>
+                  <Link to="/register" className="register-link">
+                    Register
+                  </Link>
                 </nav>
               </div>
-              <div className="cart-container ms-3">
-                <a
-                  href="/cart"
-                  className="text-white"
+              <div className="cart-container">
+                <Link
+                  to="/cart"
+                  className="cart-link"
                   aria-label="Shopping cart"
                 >
                   <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                   {cartItemCount > 0 && (
-                    <div id="cart-count">
+                    <div className="cart-count">
                       <p>{cartItemCount}</p>
                     </div>
                   )}
-                </a>
+                </Link>
               </div>
             </div>
           </div>
