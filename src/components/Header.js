@@ -11,7 +11,7 @@ function Header() {
       <div className="container">
         <div className="header-content">
           <div className="brand">
-            <h1 className="brand-name">Saturo World</h1>
+            <h1 className="brand-name">Satoru World</h1>
             <p className="brand-tagline">
               Find great deals on all your favorite products!
             </p>
