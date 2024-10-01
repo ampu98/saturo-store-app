@@ -23,3 +23,21 @@
     }
   }
 }
+
+#cart-count {
+  border-radius: 50%;
+  background-color: gold;
+  position: absolute;
+  height: 1em;
+  width: 1em;
+  left: 89%;
+  top: 14.8%;
+  line-height: 1;
+  text-align: center;
+
+  p {
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+  }
+}

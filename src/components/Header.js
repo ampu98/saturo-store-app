@@ -1,7 +1,9 @@
 import React from "react";
 import "./Header.scss";
+import { useSelector } from "react-redux";
 
 function Header() {
+  const cartItemCount = useSelector((state) => state.cr.totalItems);
   return (
     <header className="bg-dark text-white py-3">
       <div className="container">
@@ -58,6 +60,11 @@ function Header() {
                   aria-label="Shopping cart"
                 >
                   <i className="fa fa-shopping-cart" aria-hidden="true"></i>
+                  {cartItemCount > 0 && (
+                    <div id="cart-count">
+                      <p>{cartItemCount}</p>
+                    </div>
+                  )}
                 </a>
               </div>
             </div>
